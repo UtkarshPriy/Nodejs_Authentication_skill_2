@@ -1,0 +1,18 @@
+{
+  "name": "nodejs_authentication_skill_2",
+  "version": "1.0.0",
+  "description": "skill test 2",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "utkarsh priy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
