@@ -10,7 +10,11 @@
   "author": "utkarsh priy",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.3"
