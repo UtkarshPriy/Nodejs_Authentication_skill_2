@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Home Page</h1>
+        <% if (loggedInUser) { %>
+            <p>Logged in as: <%= loggedInUser.email %></p>
+            <a href="/signout" class="button">Sign Out</a>
+            <a href="/resetpassword" class="button">Reset Password</a>
+        <% } else { %>
+            <a href="/signin" class="button">Sign In</a>
+        <% } %>
+    </div>
+</body>
+</html>
