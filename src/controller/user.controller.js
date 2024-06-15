@@ -13,7 +13,7 @@ export default class User {
     };
 
     addUser = async (req, res) => {
-        console.log('check');
+        // console.log('check');
         const {
             // username,
             email,
@@ -46,12 +46,19 @@ export default class User {
     }
 
     viewHome = async(req,res)=>{
+        
+        
         if (!req.isAuthenticated()) {
-            console.log(req.user);
+            
             return res.redirect('/');
         }
-        console.log(req.user);
+        // console.log(req.user);
         res.render('home', {loggedInUser:req.user})
     }
 
 }
+
+
+
+
+
