@@ -56,6 +56,15 @@ export default class User {
         res.render('home', {loggedInUser:req.user})
     }
 
+    viewHomeGoogle = async(req,res)=>{
+        if (!req.isAuthenticated()) {
+            
+            return res.redirect('/');
+        }
+        // console.log(req.user);
+        res.render('google_success.ejs', {loggedInUser:req.user})  // http://localhost:3300/home
+    }
+
 }
 
 

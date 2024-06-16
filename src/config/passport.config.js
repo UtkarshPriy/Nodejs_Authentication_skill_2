@@ -43,33 +43,21 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (userid, password, do
 
 // Google OAuth Strategy
 passport.use(new GoogleStrategy({
-    clientID: 'YOUR_GOOGLE_CLIENT_ID',
-    clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
-    callbackURL: '/auth/google/callback'
+    
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: 'http://localhost:3300/auth/google/callback'
 }, (token, tokenSecret, profile, done) => {
-    Userlist.findOne({ googleId: profile.id })
-        .then(user => {
-            if (!user) {
-                return Userlist.create({
-                    googleId: profile.id,
-                    email: profile.emails[0].value,
-                    displayName: profile.displayName
-                });
-            }
-            return user;
-        })
-        .then(user => done(null, user))
-        .catch(err => done(err));
+    // Here we directly pass the profile to the done callback
+    return done(null, profile);
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-    Userlist.findById(id)
-        .then(user => done(null, user))
-        .catch(err => done(err));
+passport.deserializeUser((user, done) => {
+    done(null, user);
 });
 
 export default passport;
