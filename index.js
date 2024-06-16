@@ -7,6 +7,7 @@ import db from './src/config/mongoose.config.js';
 import session from 'express-session';
 import passport from "./src/config/passport.config.js";
 import ensureAuthenticated from './src/middleware/auth.middleware.js';
+import passportGoogle from "./src/config/passport.config.js";
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -44,7 +45,7 @@ app.post('/signin',
         res.redirect('/home');
     },
     userCntrl.viewHome
-);
+);      
 
 // Google OAuth authentication request
 app.get('/auth/google', 

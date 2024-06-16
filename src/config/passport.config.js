@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 
 import Userlist from '../model/user.model.js'; // Adjust path as necessary
 
@@ -43,21 +44,40 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (userid, password, do
 
 // Google OAuth Strategy
 passport.use(new GoogleStrategy({
-    
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: 'http://localhost:3300/auth/google/callback'
+    callbackURL: "http://localhost:3300/auth/google/callback"
 }, (token, tokenSecret, profile, done) => {
-    // Here we directly pass the profile to the done callback
-    return done(null, profile);
+    
+    Userlist.findOne({ email: profile.emails[0].value })
+        .then(user => {
+            if (!user) {
+                // If no user is found, create a new user
+                const newUser = new Userlist({
+                    email: profile.emails[0].value,
+                    password: crypto.randomBytes(20).toString('hex'),
+                    // You can add other profile fields as needed
+                });
+
+                newUser.save()
+                    .then(user => done(null, user))
+                    .catch(err => done(err));
+            } else {
+                // If the user is found, return the user
+                return done(null, user);
+            }
+        })
+        .catch(err => done(err));
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-    done(null, user);
+passport.deserializeUser((id, done) => {
+    Userlist.findById(id)
+        .then(user => done(null, user))
+        .catch(err => done(err));
 });
 
 export default passport;

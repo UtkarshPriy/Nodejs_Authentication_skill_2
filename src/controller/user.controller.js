@@ -61,8 +61,8 @@ export default class User {
             
             return res.redirect('/');
         }
-        // console.log(req.user);
-        res.render('google_success.ejs', {loggedInUser:req.user})  // http://localhost:3300/home
+        console.log(req.user);
+        res.render('google_success.ejs')  // http://localhost:3300/home
     }
 
 }
