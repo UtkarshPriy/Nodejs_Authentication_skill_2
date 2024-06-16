@@ -55,15 +55,33 @@ export default class User {
         // console.log(req.user);
         res.render('home', {loggedInUser:req.user})
     }
+    resetPage = async(req,res)=>{
+        res.render('reset');
+    };
+    resetPassword = async(req,res)=>{
+        const{password} = req.body;
+        const mailid = req.user.email;
+        console.log(mailid);
+        // const 
+        
+        try{
+            const saltround=11;
+            const hashedPassword = await bcrypt.hash(password, saltround);
+            await userList.findByIdAndUpdate({email:mailid},{password:hashedPassword});
 
-    viewHomeGoogle = async(req,res)=>{
-        if (!req.isAuthenticated()) {
-            
-            return res.redirect('/');
+        }catch(error){
+            console.log(error);
         }
-        console.log(req.user);
-        res.render('google_success.ejs')  // http://localhost:3300/home
+
     }
+    // viewHomeGoogle = async(req,res)=>{
+    //     if (!req.isAuthenticated()) {
+            
+    //         return res.redirect('/');
+    //     }
+    //     console.log(req.user);
+    //     res.render('google_success.ejs')  // http://localhost:3300/home
+    // }
 
 }
 

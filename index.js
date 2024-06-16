@@ -37,6 +37,8 @@ app.get('/', userCntrl.signIn);
 app.get('/signin', userCntrl.signIn);
 app.get('/signup', userCntrl.signUp);
 app.post('/signup', userCntrl.addUser);
+app.get('/resetpassword',userCntrl.resetPage);
+app.post('/resetpassword',userCntrl.resetPassword);
 
 // Local strategy authentication
 app.post('/signin',
