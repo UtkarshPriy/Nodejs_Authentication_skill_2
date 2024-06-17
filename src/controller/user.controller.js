@@ -44,7 +44,7 @@ export default class User {
         
         if (!req.isAuthenticated()) {
             
-            return res.redirect('/');
+            res.render("signIn", { msg: 'Incorrect Credential' }); 
         }
         // console.log(req.user);
         res.render('home', {loggedInUser:req.user})
@@ -71,7 +71,7 @@ export default class User {
             if (err) {
                 return res.status(500).json({ message: 'An error occurred while logging out.' });
             }
-            res.status(200).render("signIn", { msg: 'Logged Out' }); // Render the signIn view with a message
+            res.status(200).render("signIn", { msg: 'Logged Out' }); 
         });
     }
     
