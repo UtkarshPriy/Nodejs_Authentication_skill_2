@@ -43,7 +43,7 @@ app.get('/signout',userCntrl.signOut);
 
 // Local strategy authentication
 app.post('/signin',
-    passport.authenticate('local', { failureRedirect: '/signin', failureMessage: true }),
+    passport.authenticate('local', { failureRedirect: '/signin', failureMessage: true }), 
     function (req, res) {
         res.redirect('/home');
     },
