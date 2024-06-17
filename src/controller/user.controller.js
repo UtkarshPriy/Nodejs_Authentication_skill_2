@@ -66,6 +66,14 @@ export default class User {
         res.status(200).render("signIn",{msg: 'Password updated successfully'});
 
     }
+    signOut = (req, res) => {
+        req.logout((err) => { // Using the callback function
+            if (err) {
+                return res.status(500).json({ message: 'An error occurred while logging out.' });
+            }
+            res.status(200).render("signIn", { msg: 'Logged Out' }); // Render the signIn view with a message
+        });
+    }
     
 }
 
