@@ -50,7 +50,7 @@ app.post('/signin',
 );      
 
 // Google OAuth authentication request
-app.get('/auth/google', 
+app.get('/auth/google',  
     passport.authenticate('google', { scope: ['email', 'profile'] }) // Initial Google auth request
 );
 

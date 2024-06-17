@@ -61,17 +61,17 @@ export default class User {
     resetPassword = async(req,res)=>{
         const{password} = req.body;
         const mailid = req.user.email;
-        console.log(mailid);
-        // const 
+       
         
         try{
             const saltround=11;
             const hashedPassword = await bcrypt.hash(password, saltround);
-            await userList.findByIdAndUpdate({email:mailid},{password:hashedPassword});
+            await userList.findOneAndUpdate({email:mailid},{password:hashedPassword});
 
         }catch(error){
             console.log(error);
         }
+        return res.status(200);
 
     }
     // viewHomeGoogle = async(req,res)=>{
