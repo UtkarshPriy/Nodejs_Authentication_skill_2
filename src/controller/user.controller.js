@@ -1,14 +1,12 @@
 import bcrypt from 'bcrypt';
-import userList from '../model/user.model.js'
+import userList from '../model/user.model.js';
 
 export default class User {
 
     signIn = (req, res) => {
-
         res.status(200).render('signIn');
     };
     signUp = (req, res) => {
-
         res.status(200).render('signUp');
     };
 
@@ -40,13 +38,9 @@ export default class User {
         } catch (error) {
             console.log(error);
         }
-        
-
-
     }
 
     viewHome = async(req,res)=>{
-        
         
         if (!req.isAuthenticated()) {
             
@@ -61,8 +55,6 @@ export default class User {
     resetPassword = async(req,res)=>{
         const{password} = req.body;
         const mailid = req.user.email;
-       
-        
         try{
             const saltround=11;
             const hashedPassword = await bcrypt.hash(password, saltround);
@@ -71,18 +63,10 @@ export default class User {
         }catch(error){
             console.log(error);
         }
-        return res.status(200);
+        res.status(200).render("signIn",{msg: 'Password updated successfully'});
 
     }
-    // viewHomeGoogle = async(req,res)=>{
-    //     if (!req.isAuthenticated()) {
-            
-    //         return res.redirect('/');
-    //     }
-    //     console.log(req.user);
-    //     res.render('google_success.ejs')  // http://localhost:3300/home
-    // }
-
+    
 }
 
 
